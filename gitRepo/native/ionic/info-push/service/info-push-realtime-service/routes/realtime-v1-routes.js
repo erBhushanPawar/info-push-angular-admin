@@ -19,11 +19,12 @@ express.response.sendOk = function (result) {
     serverResponse.sendOk(this, { result });
 };
 
+var conf = require('../config/onesignal.conf');
 let api = express.Router();
 var onesignal_client = onesignal.createClient();
 var onesignalConfig = {
-    app_id: "ee634c19-6b0e-4a75-a5d8-0904b1aa6c68",
-    restApiKey: "OGM0YzU4MTgtZmEwNS00NTQwLWEyOWYtNDNkYTljYjk4YmQw"
+    app_id: conf.appId,
+    restApiKey: conf.apiKey
 }
 var appAuthKey = onesignalConfig.restApiKey;
 var restApiKey = appAuthKey;
