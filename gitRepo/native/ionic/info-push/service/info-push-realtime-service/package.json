@@ -18,6 +18,7 @@
     "fwsp-logger": "^0.3.0",
     "fwsp-server-response": "^2.2.6",
     "hydra-express": "^1.4.19",
+    "mongoose": "^5.0.3",
     "node-opensignal-api": "0.0.3",
     "socket.io": "^2.0.3",
     "through": "^2.3.8"

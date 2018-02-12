@@ -19,13 +19,17 @@ express.response.sendOk = function (result) {
     serverResponse.sendOk(this, { result });
 };
 
-var conf = require('../config/onesignal.conf');
+var conf = require('../config/onesignal.json');
+
 let api = express.Router();
+
 var onesignal_client = onesignal.createClient();
-var onesignalConfig = {
-    app_id: conf.appId,
-    restApiKey: conf.apiKey
-}
+var onesignalConfig = conf
+
+let mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost/info-push");
+mongoose.set("debug", true)
+
 var appAuthKey = onesignalConfig.restApiKey;
 var restApiKey = appAuthKey;
 var params = {
@@ -43,6 +47,14 @@ var params = {
         { "id": "id2", "text": "Open", "icon": "ic_menu_open" }
     ]
 }
+
+
+/**
+ * Getting data models
+ */
+
+var catModel = require('../models/category-model');
+var prodModel = require('../models/product-model');
 
 var customerIds;
 
@@ -88,13 +100,82 @@ api.get("/get-filtered-devices", (req, res) => {
         })
 })
 
+api.post("/add-category", (req, res) => {
+
+    new catModel(req.body).save((me, md) => {
+
+        if (me) {
+
+            res.sendError(me)
+        }
+        else {
+            let newNotif = params
+            newNotif.headings = {
+                en: `New category ${req.body.name}`
+            }
+
+            newNotif.contents = { "en": "Click to check out details now !" },
+                newNotif.app_id = onesignalConfig.app_id
+
+            newNotif.data = req.body
+            onesignal_client.notifications.create(restApiKey, newNotif, function (err, response) {
+                if (err) {
+                    console.log('Encountered error', err, newNotif);
+                    err.isSaved = true
+                    res.sendError(err)
+                } else {
+                    console.log(response);
+                    response.isSaved = true
+                    res.sendOk(response)
+                }
+            });
+            //res.sendOk(md)
+        }
+    })
+})
+
+api.post("/add-product", (req, res) => {
+
+    new prodModel(req.body).save((me, md) => {
+        if (me) {
+            res.sendError(me)
+        }
+        else {
+            if (req.body.notify) {
+
+                let newNotif = params
+                newNotif.headings = {
+                    en: `New product ${req.body.name}`
+                }
+                newNotif.data = req.body
+
+                newNotif.contents = { "en": "Click to check out details now !" },
+                    newNotif.app_id = onesignalConfig.app_id
+                onesignal_client.notifications.create(restApiKey, newNotif, function (err, response) {
+                    if (err) {
+                        console.log('Encountered error', err, newNotif);
+                        err.isSaved = true
+                        res.sendError(err)
+                    } else {
+                        console.log(response);
+                        response.isSaved = true
+                        res.sendOk(response)
+                    }
+                });
+            }
+            else{
+                res.sendOk(md)
+            }
+        }
+    })
+})
 api.post("/create-notification", (req, res) => {
     let newNotif = req.body
 
     newNotif.app_id = onesignalConfig.app_id
     onesignal_client.notifications.create(restApiKey, newNotif, function (err, response) {
         if (err) {
-            console.log('Encountered error', err);
+            console.log('Encountered error', err, newNotif);
             res.sendError(err)
         } else {
             console.log(response);

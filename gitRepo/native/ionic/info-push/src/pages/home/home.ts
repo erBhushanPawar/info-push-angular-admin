@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { OneSignal } from '@ionic-native/onesignal';
-
-import * as conf from "./../../assets/onesignal.conf";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -17,7 +15,7 @@ export class HomePage {
 
   async initOneSignal(userInfo?) {
     // alert("Initiaing one signal" + JSON.stringify(userInfo))
-    this.oneSignal.startInit(conf.apiKey, conf.appId)
+    this.oneSignal.startInit("onesignal API Key", "Firebase app ID")
     this.oneSignal.getIds().then((ids) => {
       //alert("Registered with OneSignal")
       
