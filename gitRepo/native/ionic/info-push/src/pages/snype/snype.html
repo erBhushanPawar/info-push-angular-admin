@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Description</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img [src]="snype.img" />
+    <ion-card-content>
+      <ion-card-title>
+        {{snype.title || snype.name}}
+      </ion-card-title>
+      <div>
+        <button round small ion-button icon-only>
+          <ion-icon name="ion-social-facebook-outline"></ion-icon>
+        </button>
+
+        <button round small ion-button icon-only>
+          <ion-icon name="ion-social-whatsapp-outline"></ion-icon>
+        </button>
+      </div>
+      <p>
+        {{snype.description}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
