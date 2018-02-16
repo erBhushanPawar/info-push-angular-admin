@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-lg-6">
+    <nb-card>
+      <nb-card-header>Create Snypse</nb-card-header>
+      <nb-card-body>
+        <div class="input-group">
+          <input type="text" placeholder="Snype Id" [(ngModel)]="snypse.snypseId" class="form-control" />
+        </div>
+        <div class="input-group">
+          <input type="text" placeholder="Title" [(ngModel)]="snypse.title" class="form-control" />
+        </div>
+
+        <div class="input-group">
+          <input type="text" placeholder="Description" [(ngModel)]="snypse.description" class="form-control" />
+        </div>
+        <div class="input-group">
+          <select class="form-control" [(ngModel)]="snypse.catId">
+          <option *ngFor="let one of cats" [value]="one.catId" >{{one.name}} - {{one.catId}}</option>
+    
+        </select>
+        </div>
+        <div class="input-group">
+          <input type="text" placeholder="Image URL" [(ngModel)]="snypse.img" class="form-control" />
+        </div>
+        <div class="input-group">
+          <button (click)="saveSnypse()" class="btn btn-primary btn-tn">Save</button>
+        </div>
+
+      </nb-card-body>
+    </nb-card>
+
+  </div>
+
+
+</div>
