@@ -2,11 +2,32 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Create Category',
         icon: 'nb-home',
-        link: '/pages/dashboard',
+        link: '/create-category',
         home: true,
     },
+    {
+        title: 'Create Snypse',
+        icon: 'nb-home',
+        link: '/create-snypse',
+        home: true,
+    },
+    {
+        title: 'List Snypse',
+        icon: 'nb-home',
+        link: '/list-snypse',
+        home: true,
+    },
+    {
+        title: 'List Categories',
+        icon: 'nb-home',
+        link: '/list-categories',
+        home: true,
+    },
+
+    
+    /* 
     {
         title: 'FEATURES',
         group: true,
@@ -154,5 +175,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 link: '/auth/reset-password',
             },
         ],
-    },
+    }, */
 ];

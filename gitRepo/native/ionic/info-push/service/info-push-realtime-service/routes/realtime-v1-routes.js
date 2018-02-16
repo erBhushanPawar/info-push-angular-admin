@@ -134,7 +134,7 @@ api.post("/add-category", (req, res) => {
     })
 })
 
-api.post("/add-product", (req, res) => {
+api.post("/add-snypse", (req, res) => {
 
     new prodModel(req.body).save((me, md) => {
         if (me) {
@@ -145,10 +145,10 @@ api.post("/add-product", (req, res) => {
 
                 let newNotif = params
                 newNotif.headings = {
-                    en: `New product ${req.body.name}`
+                    en: `New Snypse ${req.body.title}`
                 }
                 newNotif.data = req.body
-
+                newNotif.big_picture = req.body.img || params.big_picture
                 newNotif.contents = { "en": "Click to check out details now !" },
                     newNotif.app_id = onesignalConfig.app_id
                 onesignal_client.notifications.create(restApiKey, newNotif, function (err, response) {
@@ -168,6 +168,30 @@ api.post("/add-product", (req, res) => {
             }
         }
     })
+})
+
+api.get("/get-snypse", (req, res)=>{
+  prodModel.find(req.body || {}, (me, md)=>{
+    if(!me){
+        res.sendOk(md)
+    }
+    else
+    {
+        res.sendError(me)
+    }
+  })  
+})
+
+api.get("/get-categories", (req, res)=>{
+  catModel.find((me, md)=>{
+    if(!me){
+        res.sendOk(md)
+    }
+    else
+    {
+        res.sendError(me)
+    }
+  })  
 })
 api.post("/create-notification", (req, res) => {
     let newNotif = req.body

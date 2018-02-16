@@ -1,15 +1,20 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu</ion-title>
+      <ion-title>Categories</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
+      
+      <ion-item menuClose *ngFor="let p of pages"  (click)="openPage(p)">
+        <ion-avatar item-start>
+          <img src="{{(p.component.d && p.component.d.img)? (p.component.d.img) : 'http://res.cloudinary.com/brainethic/image/upload/c_scale,w_50/v1517627477/download_1_bmejdb.png'}}">
+        </ion-avatar>
+        <h2>{{p.title}}</h2>
+        <p></p>
+      </ion-item>
     </ion-list>
   </ion-content>
 
