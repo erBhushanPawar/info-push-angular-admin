@@ -22,7 +22,7 @@ config.init('./config/config.json')
     config.version = version;
     return hydraExpress.init(config.getObject(), version, () => {
       hydraExpress.registerRoutes({
-        '/v1/realtime': require('./routes/realtime-v1-routes')
+        '/v1/info-push': require('./routes/realtime-v1-routes')
       });
     });
   })

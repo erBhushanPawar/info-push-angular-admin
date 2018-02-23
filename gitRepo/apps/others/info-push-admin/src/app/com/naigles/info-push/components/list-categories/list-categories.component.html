@@ -1,3 +1,39 @@
-<p>
-  list-categories works!
-</p>
+<div class="row">
+  <div class="col-md-6">
+    <nb-card style="padding:5%;" *ngFor="let one of rows; let ind=index;">
+    
+      <div  class="details">
+        <div  class="title">{{one.name}}</div>
+        <div  class="status">{{one.catId}}</div>
+        <button (click)="toggle(one, ind)" > {{one.isActive ? "Deactivate" : "Activate"}}</button>
+        <button (click)="editToggle(one, ind)"> {{one.isEdit ? "Save" : "Edit"}}</button>
+      </div>
+    
+    </nb-card>
+
+  </div>
+  <div class="col-lg-6">
+    <nb-card>
+      <nb-card-header>Create Category</nb-card-header>
+      <nb-card-body>
+        <!--   <div class="input-group">
+          <span class="input-group-addon spanner" >Category Id</span>
+            <input type="text" [(ngModel)]="cat.catId" placeholder="Category Id" class="form-control" />
+          </div> -->
+        <div class="input-group">
+          <span class="input-group-addon spanner">Category Name</span>
+          <input type="text" [(ngModel)]="cat.name" placeholder="Category Name" class="form-control" />
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon spanner">Category Image URL</span>
+          <input type="text" placeholder="Image URL" [(ngModel)]="cat.img" class="form-control" />
+        </div>
+        <div class="input-group">
+          <button class="btn btn-primary btn-tn" (click)="editToggle(false)">Save</button>
+        </div>
+  
+      </nb-card-body>
+    </nb-card>
+  
+  </div>
+</div>

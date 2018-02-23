@@ -9,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class CreateCategoryComponent implements OnInit {
   cat = {
     name : "Sample Cat",
-    catId : Math.random().toString(20).replace("0.","")
+    catId : Math.random().toString(20).replace("0.",""),
+    img : ""
   }
   constructor(private baseService:BaseService) { }
 

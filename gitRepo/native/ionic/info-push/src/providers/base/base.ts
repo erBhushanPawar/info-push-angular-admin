@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class BaseProvider {
-  public baseUrl :string =`http://localhost:5350/v1/realtime`
+  public baseUrl :string =`http://api.pennyearn.com:3011/v1/info-push`
   constructor(public http: HttpClient) {
     console.log('Hello BaseProvider Provider');
   }

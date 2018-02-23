@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-md-6">
+
+    <nb-card style="padding:5%;" *ngFor="let one of rows; let ind = index;">
+    
+      <div class="details">
+        <div class="title">{{one.title}}</div>
+        <div class="title">{{one.description}}</div>
+        <div class="status">{{one.catId}}</div>
+        <button (click)="toggle(one, ind)"> {{one.isActive ? "Deactivate" : "Activate"}}</button>
+        <button (click)="editToggle(one, ind)"> {{one.isEdit ? "Save" : "Edit"}}</button>
+      </div>
+    
+    </nb-card>
+  </div>
+  <div class="col-md-6" *ngIf="snypse._id">
+    <nb-card>
+      <nb-card-header>Create Snypse</nb-card-header>
+      <nb-card-body>
+        <!-- <div class="input-group">
+          <span class="input-group-addon spanner">Snype Id</span>
+          <input type="text" placeholder="Snype Id" [(ngModel)]="snypse.snypseId" class="form-control" />
+        </div> -->
+        <div class="input-group">
+          <span class="input-group-addon spanner">Snype Title</span>
+          <input type="text" placeholder="Title" [(ngModel)]="snypse.title" class="form-control" />
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-addon spanner">Snype Description</span>
+          <div [froalaEditor] [(ngModel)]="snypse.description">Hello, Froala!</div>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon spanner">Category Id</span>
+          <select class="form-control" [(ngModel)]="snypse.catId">
+          <option *ngFor="let one of cats" [value]="one.catId" >{{one.name}} - {{one.catId}}</option>
+    
+        </select>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon spanner">Snype Image URL</span>
+          <input type="text" placeholder="Image URL" [(ngModel)]="snypse.img" class="form-control" />
+        </div>
+        <div class="input-group">
+          <button (click)="editToggle(false)" class="btn btn-primary btn-tn">Save</button>
+        </div>
+
+      </nb-card-body>
+    </nb-card>
+
+  </div>
+</div>

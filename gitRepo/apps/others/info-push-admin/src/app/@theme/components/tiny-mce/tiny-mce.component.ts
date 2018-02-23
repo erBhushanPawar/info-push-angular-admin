@@ -13,7 +13,7 @@ export class TinyMCEComponent implements OnDestroy, AfterViewInit {
   constructor(private host: ElementRef) { }
 
   ngAfterViewInit() {
-    tinymce.init({
+    /*tinymce.init({
       target: this.host.nativeElement,
       plugins: ['link', 'paste', 'table'],
       skin_url: 'assets/skins/lightgray',
@@ -24,10 +24,10 @@ export class TinyMCEComponent implements OnDestroy, AfterViewInit {
         });
       },
       height: '320',
-    });
+    });*/
   }
 
   ngOnDestroy() {
-    tinymce.remove(this.editor);
+//    tinymce.remove(this.editor);
   }
 }

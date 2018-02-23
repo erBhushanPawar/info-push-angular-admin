@@ -182,6 +182,28 @@ api.get("/get-snypse", (req, res)=>{
   })  
 })
 
+api.put("/update-category", (req, res)=>{
+    req.query.catId = Number(req.query.catId)
+    catModel.update(req.query, req.body, (me, md) => {
+        if (!me) {
+            res.sendOk(md)
+        }
+        else {
+            res.sendError(me)
+        }
+    })  
+})
+
+api.put("/update-snypse", (req, res) => {
+    prodModel.update(req.query, req.body, (me, md) => {
+        if (!me) {
+            res.sendOk(md)
+        }
+        else {
+            res.sendError(me)
+        }
+    })
+})
 api.get("/get-categories", (req, res)=>{
   catModel.find((me, md)=>{
     if(!me){
